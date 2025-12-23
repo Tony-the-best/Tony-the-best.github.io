@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blooket GUI</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  background: #1b1e2b;
+  color: white;
+}
+
+/* ===== TOP BAR ===== */
+.topbar {
+  height: 60px;
+  background: #2f5cff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #fff;
+  color: #2f5cff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== LAYOUT ===== */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 60px);
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 220px;
+  background: #141625;
+  padding-top: 15px;
+}
+
+.side-item {
+  padding: 14px 22px;
+  cursor: pointer;
+  opacity: 0.8;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.side-item:hover {
+  background: #2a2e44;
+  opacity: 1;
+}
+
+.side-item.active {
+  background: #2f5cff;
+  opacity: 1;
+  font-weight: bold;
+}
+
+/* ===== MAIN CONTENT ===== */
+.content {
+  flex: 1;
+  padding: 40px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+/* ===== GRID BUTTONS ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 22px;
+}
+
+button {
+  background: #2a2e44;
+  border: none;
+  border-radius: 14px;
+  padding: 25px 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: 0.15s ease;
+  box-shadow: 0 6px 0 #1a1d2e;
+}
+
+button:hover {
+  background: #3b4070;
+  transform: translateY(-3px);
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 #1a1d2e;
+}
+
+/* Click highlight */
+.flash {
+  animation: flash 0.4s;
+}
+
+@keyframes flash {
+  0% { background:#2f5cff; }
+  100% { background:#2a2e44; }
+}
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #2f5cff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.3s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  opacity: 0.4;
+  font-size: 13px;
+  padding: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="logo">Blooket GUI</div>
+  <div class="profile">
+    <div class="avatar">T</div>
+    <div>Tony</div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="side-item active" onclick="openPage('dashboard', this)">📊 Dashboard</div>
+    <div class="side-item" onclick="openPage('stats', this)">📈 Stats</div>
+    <div class="side-item" onclick="openPage('library', this)">📚 Library</div>
+    <div class="side-item" onclick="openPage('settings', this)">⚙️ Settings</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="page active">
+      <div class="grid">
+        <button onclick="copyGui(this,'GUI 1 demo text')">gui1</button>
+        <button onclick="copyGui(this,'GUI 2 demo text')">gui2</button>
+        <button onclick="copyGui(this,'GUI 3 demo text')">gui3</button>
+        <button onclick="copyGui(this,'GUI 4 demo text')">gui4</button>
+        <button onclick="copyGui(this,'GUI 5 demo text')">gui5</button>
+        <button onclick="copyGui(this,'GUI 6 demo text')">gui6</button>
+        <button onclick="copyGui(this,'GUI 7 demo text')">gui7</button>
+        <button onclick="copyGui(this,'GUI 8 demo text')">gui8</button>
+        <button onclick="copyGui(this,'GUI 9 demo text')">gui9</button>
+        <button onclick="copyGui(this,'GUI 10 demo text')">gui10</button>
+        <button onclick="copyGui(this,'GUI 11 demo text')">gui11</button>
+        <button onclick="copyGui(this,'GUI 12 demo text')">gui12</button>
+        <button onclick="copyGui(this,'GUI 13 demo text')">gui13</button>
+      </div>
+    </div>
+
+    <!-- OTHER PAGES -->
+    <div id="stats" class="page"><h2>Stats</h2><p>Demo stats page</p></div>
+    <div id="library" class="page"><h2>Library</h2><p>Demo library page</p></div>
+    <div id="settings" class="page"><h2>Settings</h2><p>Demo settings page</p></div>
+
+  </div>
+</div>
+
+<div class="footer">Educational / UI demo only</div>
+<div id="toast" class="toast">Copied!</div>
+
+<!-- SOUND -->
+<audio id="clickSound">
+  <source src="https://actions.google.com/sounds/v1/cartoon/pop.ogg">
+</audio>
+
+<script>
+function copyGui(btn, text) {
+  navigator.clipboard.writeText(text);
+  btn.classList.add("flash");
+  document.getElementById("clickSound").play();
+  showToast("Copied " + btn.innerText);
+  setTimeout(() => btn.classList.remove("flash"), 400);
+}
+
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  toast.innerText = msg;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 1500);
+}
+
+function openPage(id, el) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".side-item").forEach(i => i.classList.remove("active"));
+  el.classList.add("active");
+}
+</script>
+
+</body>
+</html>
